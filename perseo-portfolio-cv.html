@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Raffaela Sarcina — SEO Specialist</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{
+    --navy:#2d3561;--navy2:#3d4571;--accent:#c0a060;
+    --text:#1a1a2e;--muted:#6b7280;--light:#f4f5f9;
+    --border:#e2e5f0;--white:#fff;--radius:8px;
+  }
+  body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--light);color:var(--text);font-size:15px;line-height:1.6}
+  a{color:var(--accent);text-decoration:none}
+
+  /* NAV */
+  nav{background:var(--navy);padding:1rem 2rem;position:sticky;top:0;z-index:100}
+  nav .inner{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:center}
+  .nav-name{color:#fff;font-size:16px;font-weight:700;letter-spacing:1px}
+  nav ul{display:flex;gap:0;list-style:none}
+  nav ul li a{color:rgba(255,255,255,.7);font-size:13px;letter-spacing:.5px;text-transform:uppercase;padding:.5rem 1.25rem;display:block;transition:color .2s,background .2s;border-radius:4px}
+  nav ul li a:hover,nav ul li a.active{color:#fff;background:rgba(255,255,255,.1)}
+
+  .container{max-width:1100px;margin:0 auto;padding:0 2rem}
+  .page{display:none}
+  .page.active{display:block}
+
+  /* HERO */
+  #hero{background:var(--navy);padding:70px 2rem 60px;color:#fff}
+  #hero .inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:3rem;align-items:center}
+  .hero-label{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:.5rem}
+  #hero h1{font-size:clamp(2.2rem,5vw,3.8rem);font-weight:800;letter-spacing:-1px;line-height:1.1;margin-bottom:.5rem}
+  #hero h2{font-size:15px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.6);margin-bottom:1.5rem;font-weight:400}
+  .hero-bio{font-size:15px;color:rgba(255,255,255,.8);max-width:580px;line-height:1.8;margin-bottom:2rem}
+  .hero-bio strong{color:#fff}
+  .hero-btns{display:flex;gap:1rem;flex-wrap:wrap}
+  .btn-primary{background:var(--accent);color:#fff;padding:11px 24px;border-radius:var(--radius);font-weight:700;font-size:14px;cursor:pointer;border:none;transition:opacity .2s}
+  .btn-primary:hover{opacity:.85}
+  .btn-sec{border:1px solid rgba(255,255,255,.3);color:rgba(255,255,255,.8);padding:11px 24px;border-radius:var(--radius);font-size:14px;cursor:pointer;background:none;transition:border-color .2s}
+  .btn-sec:hover{border-color:#fff;color:#fff}
+  .avatar{width:170px;height:170px;border-radius:12px;background:var(--navy2);border:3px solid var(--accent);display:flex;align-items:center;justify-content:center;font-size:3.5rem;font-weight:800;color:var(--accent);flex-shrink:0}
+
+  /* STATS */
+  .stats-bar{background:var(--navy2);padding:1.5rem 2rem}
+  .stats-bar .inner{max-width:1100px;margin:0 auto;display:flex;gap:0;justify-content:center}
+  .stat-item{text-align:center;padding:0 2.5rem;border-right:1px solid rgba(255,255,255,.15)}
+  .stat-item:last-child{border-right:none}
+  .stat-num{font-size:1.8rem;font-weight:800;color:var(--accent);display:block}
+  .stat-lbl{font-size:11px;color:rgba(255,255,255,.6);letter-spacing:.5px;text-transform:uppercase;margin-top:.1rem}
+
+  /* CAROUSEL */
+  .carousel-section{background:var(--white);padding:40px 2rem;overflow:hidden}
+  .carousel-label{text-align:center;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:1.5rem}
+  .carousel-track-wrap{overflow:hidden;position:relative}
+  .carousel-track-wrap::before,.carousel-track-wrap::after{content:'';position:absolute;top:0;width:80px;height:100%;z-index:2}
+  .carousel-track-wrap::before{left:0;background:linear-gradient(to right,var(--white),transparent)}
+  .carousel-track-wrap::after{right:0;background:linear-gradient(to left,var(--white),transparent)}
+  .carousel-track{display:flex;gap:2rem;animation:scroll 20s linear infinite;width:max-content}
+  .carousel-track:hover{animation-play-state:paused}
+  @keyframes scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+  .tool-badge{display:flex;align-items:center;gap:.5rem;background:var(--light);border:1px solid var(--border);border-radius:6px;padding:.6rem 1.25rem;white-space:nowrap;font-size:13px;font-weight:600;color:var(--navy)}
+  .tool-badge .dot{width:8px;height:8px;border-radius:50%;background:var(--accent);flex-shrink:0}
+
+  /* CTA HOME */
+  .home-cta{background:var(--light);padding:60px 2rem;text-align:center}
+  .home-cta h2{font-size:1.8rem;font-weight:700;color:var(--navy);margin-bottom:.75rem}
+  .home-cta p{color:var(--muted);max-width:480px;margin:0 auto 2rem}
+  .home-cta-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+  .btn-navy{background:var(--navy);color:#fff;padding:11px 24px;border-radius:var(--radius);font-weight:700;font-size:14px;cursor:pointer;border:none;transition:opacity .2s}
+  .btn-navy:hover{opacity:.85}
+
+  /* SECTION HEADERS */
+  section{padding:60px 2rem}
+  .section-header{display:flex;align-items:center;gap:1rem;margin-bottom:2.5rem}
+  .section-tag{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);font-weight:600;white-space:nowrap}
+  .section-line{flex:1;height:1px;background:var(--border)}
+
+  /* CASOS */
+  .caso-card{border:1px solid var(--border);border-radius:var(--radius);margin-bottom:1.5rem;overflow:hidden;background:var(--white)}
+  .caso-top{background:var(--navy);padding:1.5rem;color:#fff}
+  .caso-meta{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:.6rem}
+  .caso-tag{font-size:11px;padding:3px 10px;border-radius:4px;background:rgba(255,255,255,.15);color:rgba(255,255,255,.85)}
+  .caso-tag.ac{background:var(--accent)}
+  .caso-top h3{font-size:17px;font-weight:700;margin-bottom:.2rem}
+  .caso-sector{font-size:13px;color:rgba(255,255,255,.55)}
+  .caso-body{padding:1.5rem}
+  .caso-reto{background:var(--light);border-left:3px solid var(--accent);padding:.75rem 1rem;border-radius:0 var(--radius) var(--radius) 0;margin-bottom:1rem;font-size:13px;color:var(--muted);line-height:1.6}
+  .caso-reto strong{display:block;font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:var(--navy);margin-bottom:.2rem}
+  .caso-body p{font-size:14px;color:var(--muted);line-height:1.7;margin-bottom:1rem}
+  .metrics{display:flex;flex-wrap:wrap;gap:.6rem}
+  .metric{background:var(--light);border-radius:var(--radius);padding:.7rem 1rem;text-align:center;min-width:110px}
+  .metric .val{font-size:1.3rem;font-weight:800;color:var(--navy);display:block;line-height:1}
+  .metric .lbl{font-size:10px;color:var(--muted);margin-top:.2rem;letter-spacing:.3px}
+
+  /* STACK */
+  .stack-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem}
+  .stack-cat{background:var(--white);border-radius:var(--radius);padding:1.25rem;border-top:3px solid var(--navy)}
+  .stack-cat h3{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--navy);margin-bottom:.75rem;font-weight:700}
+  .chip-wrap{display:flex;flex-wrap:wrap;gap:.4rem}
+  .chip{font-size:12px;background:var(--light);border:1px solid var(--border);border-radius:20px;padding:3px 10px;color:var(--muted)}
+
+  /* CONTACTO */
+  .contact-box{max-width:560px;margin:0 auto;background:var(--white);border-radius:var(--radius);padding:2.5rem;border:1px solid var(--border)}
+  .contact-box h2{font-size:1.6rem;font-weight:700;color:var(--navy);margin-bottom:.5rem}
+  .contact-box p{color:var(--muted);margin-bottom:2rem}
+  .contact-item{display:flex;align-items:center;gap:1rem;padding:1rem 0;border-bottom:1px solid var(--border);font-size:14px}
+  .contact-item:last-of-type{border-bottom:none}
+  .contact-icon{width:36px;height:36px;background:var(--light);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+  .contact-item strong{display:block;font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:.1rem}
+  .contact-item span{color:var(--text);font-weight:500}
+
+  footer{background:#1a1f3a;padding:1.5rem;text-align:center;font-size:13px;color:rgba(255,255,255,.4)}
+
+  @media(max-width:700px){
+    #hero .inner{grid-template-columns:1fr}
+    .avatar{display:none}
+    .stats-bar .inner{flex-wrap:wrap;gap:1rem}
+    .stat-item{border-right:none;flex:1 1 40%}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="inner">
+    <div class="nav-name">RAFFAELA SARCINA P.</div>
+    <ul>
+      <li><a href="#" class="active" onclick="show('home',this)">Inicio</a></li>
+      <li><a href="#" onclick="show('portfolio',this)">Portfolio</a></li>
+      <li><a href="#" onclick="show('stack',this)">Stack</a></li>
+      <li><a href="#" onclick="show('contacto',this)">Contacto</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HOME -->
+<div id="home" class="page active">
+
+  <section id="hero">
+    <div class="inner">
+      <div>
+        <div class="hero-label">SEO Specialist · perseodigital.es</div>
+        <h1>RAFFAELA<br>SARCINA P.</h1>
+        <h2>SEO Specialist</h2>
+        <p class="hero-bio">Especialista en SEO con <strong>enfoque integral en posicionamiento on page, off page, técnico, local y GEO</strong>. Combino estrategia, análisis técnico y optimización de contenido para impulsar la visibilidad orgánica, la autoridad de dominio y el rendimiento en buscadores — incluyendo motores de IA generativa.</p>
+        <div class="hero-btns">
+          <button class="btn-primary" onclick="show('portfolio',document.querySelector('[onclick*=portfolio]'))">Ver portfolio</button>
+          <button class="btn-sec" onclick="show('contacto',document.querySelector('[onclick*=contacto]'))">Contactar →</button>
+        </div>
+      </div>
+      <div class="avatar">RS</div>
+    </div>
+  </section>
+
+  <div class="stats-bar">
+    <div class="inner">
+      <div class="stat-item"><span class="stat-num">8+</span><span class="stat-lbl">Años de experiencia</span></div>
+      <div class="stat-item"><span class="stat-num">+484%</span><span class="stat-lbl">Impresiones logradas</span></div>
+      <div class="stat-item"><span class="stat-num">+645%</span><span class="stat-lbl">Clics orgánicos</span></div>
+      <div class="stat-item"><span class="stat-num">4</span><span class="stat-lbl">Casos documentados</span></div>
+    </div>
+  </div>
+
+  <div class="carousel-section">
+    <div class="carousel-label">Herramientas con las que trabajo</div>
+    <div class="carousel-track-wrap">
+      <div class="carousel-track">
+        <div class="tool-badge"><div class="dot"></div>Ahrefs</div>
+        <div class="tool-badge"><div class="dot"></div>SEMrush</div>
+        <div class="tool-badge"><div class="dot"></div>Google Search Console</div>
+        <div class="tool-badge"><div class="dot"></div>Google Analytics 4</div>
+        <div class="tool-badge"><div class="dot"></div>Google Tag Manager</div>
+        <div class="tool-badge"><div class="dot"></div>HubSpot</div>
+        <div class="tool-badge"><div class="dot"></div>Looker Studio</div>
+        <div class="tool-badge"><div class="dot"></div>WordPress</div>
+        <div class="tool-badge"><div class="dot"></div>Screaming Frog</div>
+        <div class="tool-badge"><div class="dot"></div>Yoast SEO</div>
+        <div class="tool-badge"><div class="dot"></div>Rank Math</div>
+        <div class="tool-badge"><div class="dot"></div>Dinorank</div>
+        <div class="tool-badge"><div class="dot"></div>Notion</div>
+        <div class="tool-badge"><div class="dot"></div>Shopify</div>
+        <!-- duplicate for loop -->
+        <div class="tool-badge"><div class="dot"></div>Ahrefs</div>
+        <div class="tool-badge"><div class="dot"></div>SEMrush</div>
+        <div class="tool-badge"><div class="dot"></div>Google Search Console</div>
+        <div class="tool-badge"><div class="dot"></div>Google Analytics 4</div>
+        <div class="tool-badge"><div class="dot"></div>Google Tag Manager</div>
+        <div class="tool-badge"><div class="dot"></div>HubSpot</div>
+        <div class="tool-badge"><div class="dot"></div>Looker Studio</div>
+        <div class="tool-badge"><div class="dot"></div>WordPress</div>
+        <div class="tool-badge"><div class="dot"></div>Screaming Frog</div>
+        <div class="tool-badge"><div class="dot"></div>Yoast SEO</div>
+        <div class="tool-badge"><div class="dot"></div>Rank Math</div>
+        <div class="tool-badge"><div class="dot"></div>Dinorank</div>
+        <div class="tool-badge"><div class="dot"></div>Notion</div>
+        <div class="tool-badge"><div class="dot"></div>Shopify</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="home-cta">
+    <h2>¿Tienes un proyecto SEO?</h2>
+    <p>Cuéntame el reto. Respondo en menos de 24h desde Benalmádena, en remoto para cualquier mercado.</p>
+    <div class="home-cta-btns">
+      <button class="btn-navy" onclick="show('portfolio',document.querySelector('[onclick*=portfolio]'))">Ver casos de éxito</button>
+      <button class="btn-primary" onclick="show('contacto',document.querySelector('[onclick*=contacto]'))">Contactar →</button>
+    </div>
+  </div>
+
+</div>
+
+<!-- PORTFOLIO -->
+<div id="portfolio" class="page">
+  <section>
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Portfolio · Casos de éxito</span>
+        <div class="section-line"></div>
+      </div>
+
+      <div class="caso-card">
+        <div class="caso-top">
+          <div class="caso-meta">
+            <span class="caso-tag ac">SaaS B2B</span>
+            <span class="caso-tag">SEO Técnico</span>
+            <span class="caso-tag">GEO</span>
+            <span class="caso-tag">GA4 · GTM</span>
+            <span class="caso-tag">3 años</span>
+          </div>
+          <h3>Spoonity — Plataforma de fidelización · América</h3>
+          <div class="caso-sector">spoonity.com · Argentina a Canadá</div>
+        </div>
+        <div class="caso-body">
+          <div class="caso-reto"><strong>El reto</strong>Rediseño web simultáneo en español e inglés sin estrategia SEO. Hreflang mal configurados, canonicals incorrectos y estructura de medición con 3 contenedores GTM y 2 propiedades GA4 en paralelo generando datos duplicados en HubSpot.</div>
+          <p>Auditoría técnica completa, gestión de hreflang y canonicals durante migración. Optimización on page y off page. Consolidación de GA4 + GTM para eliminar duplicación de eventos. Producción de 21 artículos de blog en español y creación de sección de Casos de Éxito. Disavow de enlaces tóxicos e implementación de monitorización GEO.</p>
+          <div class="metrics">
+            <div class="metric"><span class="val">+484%</span><div class="lbl">Impresiones orgánicas</div></div>
+            <div class="metric"><span class="val">+645%</span><div class="lbl">Clics orgánicos</div></div>
+            <div class="metric"><span class="val">+318%</span><div class="lbl">Keywords consultadas</div></div>
+            <div class="metric"><span class="val">1.447</span><div class="lbl">Sesiones desde IAs</div></div>
+            <div class="metric"><span class="val">1.3M</span><div class="lbl">Impresiones totales</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="caso-card">
+        <div class="caso-top">
+          <div class="caso-meta">
+            <span class="caso-tag ac">FMCG</span>
+            <span class="caso-tag">SEO Técnico</span>
+            <span class="caso-tag">GEO / AEO</span>
+            <span class="caso-tag">On Page</span>
+            <span class="caso-tag">3 meses · En curso</span>
+          </div>
+          <h3>Enfabebe · Chocomilk — Reckitt México</h3>
+          <div class="caso-sector">enfabebe.com.mx · chocomilk.com.mx · Nutrición infantil · México</div>
+        </div>
+        <div class="caso-body">
+          <div class="caso-reto"><strong>El reto</strong>Estrategia SEO orientada a audiencias globales sin foco en México. Bug de canonicals post-migración en Chocomilk. Core Web Vitals con problemas técnicos sin resolver. Medición y reportes sin estructurar.</div>
+          <p>Auditoría del trabajo SEO previo. Detección del bug de canonicals en Chocomilk. Optimización de URLs e interlinks en Enfabebe. Gestión de tickets técnicos para dev (Core Web Vitals). Propuesta de PR digital. Reportes mensuales y semestrales con contexto México vs global. Monitorización de presencia en IA generativa.</p>
+          <div class="metrics">
+            <div class="metric"><span class="val">+121%</span><div class="lbl">Keywords Top 3 YoY México</div></div>
+            <div class="metric"><span class="val">+94%</span><div class="lbl">Keywords Top 10 YoY México</div></div>
+            <div class="metric"><span class="val">7.7</span><div class="lbl">Posición media (vs 10.7)</div></div>
+            <div class="metric"><span class="val">246</span><div class="lbl">Respuestas en IAs</div></div>
+            <div class="metric"><span class="val">+31%</span><div class="lbl">Impresiones México</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="caso-card">
+        <div class="caso-top">
+          <div class="caso-meta">
+            <span class="caso-tag ac">Tech B2B</span>
+            <span class="caso-tag">SEO Técnico</span>
+            <span class="caso-tag">Contenidos</span>
+            <span class="caso-tag">Link Building</span>
+            <span class="caso-tag">~1 año</span>
+          </div>
+          <h3>EON Technology — Redes y conectividad · Colombia / LATAM</h3>
+          <div class="caso-sector">2023 – 2024</div>
+        </div>
+        <div class="caso-body">
+          <div class="caso-reto"><strong>El reto</strong>Autoridad de dominio casi nula (DR 1). Sitio traducido sin hreflang generando contenido duplicado y dispersión de PageRank. Caída significativa de tráfico sin causa técnica identificada.</div>
+          <p>Diagnóstico del impacto de traducción sin hreflang y plan de recuperación. Auditoría SEO completa con análisis competitivo. Optimización on page. Producción de blog estratégico con keywords de larga cola. Linkbuilding y mejora de CTR mediante optimización de títulos y metas.</p>
+          <div class="metrics">
+            <div class="metric"><span class="val">+453%</span><div class="lbl">Clics orgánicos (6 meses)</div></div>
+            <div class="metric"><span class="val">161→890</span><div class="lbl">Clics período trabajo</div></div>
+            <div class="metric"><span class="val">+79</span><div class="lbl">Nuevas keywords</div></div>
+            <div class="metric"><span class="val">177</span><div class="lbl">Keywords totales</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="caso-card">
+        <div class="caso-top">
+          <div class="caso-meta">
+            <span class="caso-tag ac">Salud digital</span>
+            <span class="caso-tag">SEO Técnico</span>
+            <span class="caso-tag">On Page</span>
+            <span class="caso-tag">6 meses</span>
+          </div>
+          <h3>Doctor Heal Online — Medicina integrativa · México</h3>
+          <div class="caso-sector">doctorhealonline.com · Proyecto puntual</div>
+        </div>
+        <div class="caso-body">
+          <div class="caso-reto"><strong>El reto</strong>Sitemap sin estructurar con subcarpetas incorrectas indexadas. Páginas rotas tras migración. Sin sitelinks definidos ni estrategia de keywords documentada.</div>
+          <p>Corrección técnica post-migración: páginas rotas, redirecciones, indexación. Reestructuración del sitemap. Configuración de sitelinks. Optimización SEO on page: keywords, metatags, interlinks y ALT.</p>
+          <div class="metrics">
+            <div class="metric"><span class="val">28.1→13.7</span><div class="lbl">Posición media</div></div>
+            <div class="metric"><span class="val">4.21K</span><div class="lbl">Clics (últimos 3 meses)</div></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</div>
+
+<!-- STACK -->
+<div id="stack" class="page">
+  <section>
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Stack de herramientas</span>
+        <div class="section-line"></div>
+      </div>
+      <div class="stack-grid">
+        <div class="stack-cat">
+          <h3>Analítica & Medición</h3>
+          <div class="chip-wrap">
+            <span class="chip">Google Search Console</span>
+            <span class="chip">Google Analytics 4</span>
+            <span class="chip">Google Tag Manager</span>
+            <span class="chip">Looker Studio</span>
+          </div>
+        </div>
+        <div class="stack-cat">
+          <h3>SEO & Research</h3>
+          <div class="chip-wrap">
+            <span class="chip">Ahrefs</span>
+            <span class="chip">SEMrush</span>
+            <span class="chip">Dinorank</span>
+            <span class="chip">Screaming Frog</span>
+          </div>
+        </div>
+        <div class="stack-cat">
+          <h3>CMS & Web</h3>
+          <div class="chip-wrap">
+            <span class="chip">WordPress</span>
+            <span class="chip">Shopify</span>
+            <span class="chip">Yoast SEO</span>
+            <span class="chip">Rank Math</span>
+          </div>
+        </div>
+        <div class="stack-cat">
+          <h3>Marketing & Gestión</h3>
+          <div class="chip-wrap">
+            <span class="chip">HubSpot</span>
+            <span class="chip">Notion</span>
+            <span class="chip">Canva</span>
+            <span class="chip">Microsoft Tools</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- CONTACTO -->
+<div id="contacto" class="page">
+  <section>
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Contacto</span>
+        <div class="section-line"></div>
+      </div>
+      <div class="contact-box">
+        <h2>¿Hablamos?</h2>
+        <p>Cuéntame tu proyecto. Respondo en menos de 24h desde Benalmádena, en remoto para cualquier mercado.</p>
+        <div class="contact-item">
+          <div class="contact-icon">✉</div>
+          <div><strong>Email</strong><span>raffaelasp395@gmail.com</span></div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">📞</div>
+          <div><strong>Teléfono</strong><span>+34 621 07 10 51</span></div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">📍</div>
+          <div><strong>Ubicación</strong><span>Benalmádena, Málaga · España</span></div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">🌐</div>
+          <div><strong>Web</strong><span>perseodigital.es</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<footer>
+  Raffaela Sarcina Pinzón · SEO Specialist · perseodigital.es · Benalmádena, España
+</footer>
+
+<script>
+  function show(id, el){
+    document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    document.querySelectorAll('nav ul a').forEach(a=>a.classList.remove('active'));
+    if(el) el.classList.add('active');
+    window.scrollTo(0,0);
+  }
+</script>
+</body>
+</html>
