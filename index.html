@@ -114,10 +114,34 @@
   footer{background:#1a1f3a;padding:1.5rem;text-align:center;font-size:13px;color:rgba(255,255,255,.4)}
 
   @media(max-width:700px){
+    nav .inner{flex-direction:column;gap:.75rem;padding:.75rem 0}
+    nav ul{gap:0;flex-wrap:wrap;justify-content:center}
+    nav ul li a{padding:.4rem .75rem;font-size:12px}
+    #hero{padding:40px 1.25rem 35px}
     #hero .inner{grid-template-columns:1fr}
+    #hero h1{font-size:2.2rem}
     .avatar{display:none}
-    .stats-bar .inner{flex-wrap:wrap;gap:1rem}
-    .stat-item{border-right:none;flex:1 1 40%}
+    .hero-btns{flex-direction:column}
+    .btn-primary,.btn-sec{width:100%;text-align:center}
+    .stats-bar{padding:1.25rem}
+    .stats-bar .inner{flex-wrap:wrap;gap:.5rem;justify-content:center}
+    .stat-item{border-right:none;border-bottom:1px solid rgba(255,255,255,.1);padding:.75rem 1.5rem;flex:1 1 40%;text-align:center}
+    .stat-item:last-child{border-bottom:none}
+    .carousel-section{padding:30px 1rem}
+    .home-cta{padding:40px 1.25rem}
+    .home-cta-btns{flex-direction:column;align-items:center}
+    .btn-navy,.btn-primary{width:100%;max-width:300px;text-align:center}
+    section{padding:40px 1.25rem}
+    .caso-top{padding:1.25rem}
+    .caso-body{padding:1.25rem}
+    .caso-meta{gap:.4rem}
+    .metrics{gap:.5rem}
+    .metric{min-width:calc(50% - .25rem);flex:1 1 calc(50% - .25rem)}
+    div[style*="grid-template-columns:1fr 1fr"]{grid-template-columns:1fr !important}
+    .stack-grid{grid-template-columns:1fr}
+    .contact-box{padding:1.5rem}
+    .section-header{margin-bottom:1.5rem}
+    .home-cta h2{font-size:1.4rem}
   }
 </style>
 </head>
